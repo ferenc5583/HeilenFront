@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Heilen</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+  
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15" [streetViewControl]="false">
+        <agm-direction [origin]="origin" [destination]="destination" travelMode="DRIVING">
+        </agm-direction>
+    </agm-map>
+    
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div>Distancia</div>
+          </ion-col>
+          <ion-col>
+            <div>Tiempo</div>
+          </ion-col>
+        </ion-row>
+    </ion-grid>
+  
+  </ion-content>

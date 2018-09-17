@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Heilen</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <agm-map (mapReady)="mapReady($event)" [latitude]="lat" [longitude]="lng" [zoom]="15" [streetViewControl]="false" [usePanning]="false" [scrollwheel]="true" [rotateControl]="true" [zoomControl]="false">
+    <agm-marker [latitude]="lat" [longitude]="lng" iconUrl="/assets/imgs/point.png" ></agm-marker>
+  </agm-map>
+
+  <ion-fab top right edge>
+      <button ion-fab mini><ion-icon name="add"></ion-icon></button>
+      <ion-fab-list>
+        <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
+        <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
+        <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
+        <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
+      </ion-fab-list>
+    </ion-fab>
+
+      <ion-fab right bottom>
+          <button ion-fab color="light" on-click="myPosition()"><ion-icon name="locate"></ion-icon></button>
+      </ion-fab>
+  
+</ion-content>

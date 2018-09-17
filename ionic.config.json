@@ -1,0 +1,7 @@
+{
+  "name": "Heilen",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
