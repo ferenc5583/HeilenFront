@@ -7,12 +7,12 @@
 </ion-header>
 <ion-content padding id="page11">
     <ion-list id="registrarse-list3">
-      <!-- <ion-item id="registrarse-input3">
+      <ion-item id="registrarse-input3">
         <ion-label>
           Rut
         </ion-label>
-        <ion-input type="text" placeholder=""></ion-input>
-      </ion-item> -->
+        <ion-input type="text" [(ngModel)]="rut" placeholder=""></ion-input>
+      </ion-item>
       <ion-item id="registrarse-input4">
         <ion-label>
           Nombre
@@ -50,6 +50,10 @@
         Repetir Contraseña
       </ion-label>
       <ion-input type="password" [(ngModel)]="passRepete" placeholder=""></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label stacked on-click="goToTerminos()">Acepta los Terminos y Condiciones del Servicio</ion-label>
+        <ion-checkbox checked="true"></ion-checkbox>
     </ion-item>
     <button id="registrarse-button4" ion-button color="stable" block on-click="goToRegister()">
       Registrarse

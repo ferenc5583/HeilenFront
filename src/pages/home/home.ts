@@ -12,6 +12,9 @@ export class HomePage {
   
   lat: any;
   lng: any;
+  locations: any;
+
+  url = 'http://localhost:8081';
 
   protected map: any;
 
@@ -19,6 +22,7 @@ export class HomePage {
 
     setInterval(()=> {
       this.ionViewDidLoad();
+      this.ngOnInit();
     },3000); 
 
   }
@@ -28,7 +32,15 @@ export class HomePage {
       this.lat = pos.coords.latitude;
       this.lng = pos.coords.longitude;
       console.log(this.lat+" "+this.lng);
-    }).catch(err => alert("No hemos podido encontrarte, Procura activar tu GPS"));
+    }).catch(err => alert("No hemos podido encontrarte, Procura activar tu GPS"+err));
+  }
+
+  ngOnInit(){
+    let url = `${this.url}/posicion/`;
+    this.http.get(url)
+    .subscribe(r => {
+      this.locations = r;
+    })
   }
 
   protected mapReady(map) {
@@ -39,5 +51,7 @@ export class HomePage {
     if (this.map)
       this.map.panTo({ lat: this.lat, lng: this.lng });
   }
+
+
 
 }

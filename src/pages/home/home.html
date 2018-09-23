@@ -11,6 +11,7 @@
 
   <agm-map (mapReady)="mapReady($event)" [latitude]="lat" [longitude]="lng" [zoom]="15" [streetViewControl]="false" [usePanning]="false" [scrollwheel]="true" [rotateControl]="true" [zoomControl]="false">
     <agm-marker [latitude]="lat" [longitude]="lng" iconUrl="/assets/imgs/point.png" ></agm-marker>
+    <agm-marker *ngFor="let location of locations; let i=index" [latitude]="location.lat" [longitude]="location.lng"></agm-marker>
   </agm-map>
 
   <ion-fab top right edge>

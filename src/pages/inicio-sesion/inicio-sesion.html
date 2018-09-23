@@ -21,6 +21,9 @@
         <ion-input type="password" [(ngModel)]="password" placeholder="Contraseña" value="password"></ion-input>
       </ion-item>
     </ion-list>
+    <ion-label on-click="passForgot()">
+      Olvido su contraseña?
+    </ion-label>
     <div class="spacer" style="height:40px;" id="inicioSesion-spacer1"></div>
     <button id="inicioSesion-button2" ion-button color="stable" block on-click="Signup()">
       Iniciar Sesion

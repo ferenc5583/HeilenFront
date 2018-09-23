@@ -4,6 +4,7 @@ import { NavController } from 'ionic-angular';
 import { RegistrarsePage } from '../registrarse/registrarse';
 import { AuthService } from '../../services/auth.service';
 import { HomePage } from '../home/home';
+import { RestaurarContrasenaPage } from '../restaurar-contrasena/restaurar-contrasena';
 
 @Component({
   selector: 'page-inicio-sesion',
@@ -42,5 +43,9 @@ export class InicioSesionPage {
   goToRegister(params){
     if (!params) params = {};
     this.navCtrl.push(RegistrarsePage);
+  }
+
+  passForgot(){
+    this.navCtrl.push(RestaurarContrasenaPage);
   }
 }

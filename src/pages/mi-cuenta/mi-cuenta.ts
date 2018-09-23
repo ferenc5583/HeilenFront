@@ -8,7 +8,6 @@ import { RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/catch';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'page-mi-cuenta',
@@ -17,6 +16,13 @@ import { Observable } from 'rxjs';
 export class MiCuentaPage {
 
   private options;
+
+  nombre: string;
+  apellido: string;
+  email: string;
+  rut: string;
+
+  url = 'http://localhost:8081';
 
   constructor(
     public navCtrl: NavController,
@@ -35,13 +41,22 @@ export class MiCuentaPage {
     this.navCtrl.setRoot(InicioSesionPage);
   }
 
-  Test(): Observable<any>{
+  Testla(){
     console.log(this.options);
     //this.http.get('http://localhost:8081/user/').subscribe(res => console.log(res));
-    let url = "http://localhost:8081/user/";
+    let url = `${this.url}/user/`;
     this.http.get(url, this.options)
     .subscribe(r => console.log(r));
-    return;
+ }
+
+  ngOnInit(){
+    //funcion de prueba cambiar despues por token
+    this.http.get(`${this.url}/user/26`).subscribe(res => {
+      this.email = res.username;
+      this.nombre = res.firstname.toUpperCase();
+      this.apellido = res.lastname.toUpperCase();
+      this.rut = res.rut.toUpperCase();
+    });
  }
 
 }

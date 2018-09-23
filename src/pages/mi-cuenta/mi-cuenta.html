@@ -12,21 +12,22 @@
   <ion-list id="miCuenta-list6">
     <ion-item color="none" id="miCuenta-list-item13">
       Nombre
-      <ion-note item-right></ion-note>
+      <ion-note item-right>{{nombre}}</ion-note>
     </ion-item>
     <ion-item color="none" id="miCuenta-list-item14">
       Apellido
-      <ion-note item-right></ion-note>
+      <ion-note item-right>{{apellido}}</ion-note>
     </ion-item>
     <ion-item color="none" id="miCuenta-list-item15">
+      Rut
+      <ion-note item-right>{{rut}}</ion-note>
+    </ion-item>
+    <ion-item color="none" id="miCuenta-list-item16">
       Email
-      <ion-note item-right></ion-note>
+      <ion-note item-right>{{email}}</ion-note>
     </ion-item>
   </ion-list>
-  <button ion-button outline color="positive" block on-click="logOut()">
+  <button ion-button outline color="danger" block on-click="logOut()">
     Cerrar Sesion
-  </button>
-  <button ion-button outline color="positive" block on-click="Test()">
-    Datos user x consola
   </button>
 </ion-content>
