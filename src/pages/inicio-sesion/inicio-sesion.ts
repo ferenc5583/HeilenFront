@@ -29,7 +29,7 @@ export class InicioSesionPage {
       rs => this.isLogged = rs,
       er => console.log(er),
       () => {
-        if(this.isLogged){
+        if(this.isLogged == true){
           this.navCtrl.setRoot(HomePage)
           .then(data => console.log(data),
           error => console.log(error));

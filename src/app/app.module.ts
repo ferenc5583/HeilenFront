@@ -10,6 +10,7 @@ import { InicioSesionPage } from '../pages/inicio-sesion/inicio-sesion';
 import { RegistrarsePage } from '../pages/registrarse/registrarse';
 import { MiCuentaPage } from '../pages/mi-cuenta/mi-cuenta';
 import { RestaurarContrasenaPage } from '../pages/restaurar-contrasena/restaurar-contrasena';
+import { CambiarPage } from '../pages/cambiar/cambiar';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -30,7 +31,8 @@ import { AuthService } from '../services/auth.service';
     InicioSesionPage,
     RegistrarsePage,
     MiCuentaPage,
-    RestaurarContrasenaPage
+    RestaurarContrasenaPage,
+    CambiarPage
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import { AuthService } from '../services/auth.service';
     InicioSesionPage,
     RegistrarsePage,
     MiCuentaPage,
-    RestaurarContrasenaPage
+    RestaurarContrasenaPage,
+    CambiarPage
   ],
   providers: [
     StatusBar,

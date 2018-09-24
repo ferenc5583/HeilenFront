@@ -33,6 +33,7 @@ export class RegistrarsePage {
     }
   }
 
+  //hacer planila de terminos y condiciones funcional
   goToTerminos(){
     alert("te vamoa a kagar");
   }
