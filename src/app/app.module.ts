@@ -38,7 +38,8 @@ import { AuthService } from '../services/auth.service';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAxzUOUr8XRiAPvL5sdhs7gYhC8_GxWrEU'
+      apiKey: 'AIzaSyAxzUOUr8XRiAPvL5sdhs7gYhC8_GxWrEU',
+      libraries: ['geometry']
     }),
     AgmDirectionModule,
     HttpClientModule,

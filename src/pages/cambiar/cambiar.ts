@@ -12,6 +12,8 @@ export class CambiarPage {
   newPass: string;
   repetePass: string;
 
+  token = localStorage.getItem('token');
+
   url = 'http://localhost:8081';
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: HttpClient) {
@@ -28,13 +30,10 @@ export class CambiarPage {
 
   //buscar por token el username en el back
   cambiarPass(){
-    console.log(this.currentPass);
-    console.log(this.newPass);
-    console.log(this.repetePass);
-    this.http.get(`${this.url}/user/passFind/carmen.amestica.mh@gmail.com,${this.currentPass}`).subscribe(res => {
+    this.http.get(`${this.url}/user/passFind/${this.currentPass}`, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } }).subscribe(res => {
       if(res.find == true){
         if(this.newPass == this.repetePass){
-          this.http.put(`${this.url}/user/passEdit/carmen.amestica.mh@gmail.com,${this.newPass}`, { }).subscribe(lares => {
+          this.http.put(`${this.url}/user/passEdit/${this.newPass}`, {}, { headers: { 'Authorization': 'bearer ' + this.token } }).subscribe(lares => {
             alert(lares.message);
             this.currentPass = "";
             this.newPass = "";
