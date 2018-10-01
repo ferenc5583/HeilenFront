@@ -38,7 +38,7 @@ export class MiCuentaPage {
   ngOnInit() {
     let url = `${this.url}/user/`;
     this.http.get(url, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } })
-      .subscribe(res => {
+      .subscribe((res: any) => {
         this.email = res.username;
         this.nombre = res.firstname.toUpperCase();
         this.apellido = res.lastname.toUpperCase();

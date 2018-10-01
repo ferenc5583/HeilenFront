@@ -30,10 +30,10 @@ export class CambiarPage {
 
   //buscar por token el username en el back
   cambiarPass(){
-    this.http.get(`${this.url}/user/passFind/${this.currentPass}`, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } }).subscribe(res => {
+    this.http.get(`${this.url}/user/passFind/${this.currentPass}`, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } }).subscribe((res: any) => {
       if(res.find == true){
         if(this.newPass == this.repetePass){
-          this.http.put(`${this.url}/user/passEdit/${this.newPass}`, {}, { headers: { 'Authorization': 'bearer ' + this.token } }).subscribe(lares => {
+          this.http.put(`${this.url}/user/passEdit/${this.newPass}`, {}, { headers: { 'Authorization': 'bearer ' + this.token } }).subscribe((lares: any) => {
             alert(lares.message);
             this.currentPass = "";
             this.newPass = "";

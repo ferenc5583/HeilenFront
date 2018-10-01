@@ -7,22 +7,30 @@
     </ion-navbar>
   </ion-header>
   
-  <ion-content>
+  <ion-content class="grid-basic-page">
   
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15" [streetViewControl]="false">
-        <agm-direction [origin]="origin" [destination]="destination" travelMode="DRIVING">
+        <agm-direction [origin]="origin" [destination]="destination" travelMode="WALKING">
         </agm-direction>
     </agm-map>
     
     <ion-grid>
-        <ion-row>
-          <ion-col>
-            <div>Distancia</div>
-          </ion-col>
-          <ion-col>
-            <div>Tiempo</div>
-          </ion-col>
-        </ion-row>
+      <ion-row>
+        <ion-col style="text-align: center">
+          Distancia
+        </ion-col>
+        <ion-col style="text-align: center">
+          Tiempo
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="text-align: center">
+          {{distance}} km
+        </ion-col>
+        <ion-col style="text-align: center">
+          {{duration}} min
+        </ion-col>
+      </ion-row>
     </ion-grid>
   
   </ion-content>

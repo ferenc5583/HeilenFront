@@ -12,13 +12,13 @@
         <ion-icon name="at"></ion-icon>
         </ion-label>
         <!-- borrar values de email y contraseña pre cargadas -->
-        <ion-input type="email" [(ngModel)]="username" placeholder="Email" value="enabled@user.com"></ion-input>
+        <ion-input type="email" [(ngModel)]="username" placeholder="Email" value="ferenc5583@gmail.com"></ion-input>
       </ion-item>
       <ion-item id="inicioSesion-input2">
         <ion-label>
         <ion-icon name="key"></ion-icon>
         </ion-label>
-        <ion-input type="password" [(ngModel)]="password" placeholder="Contraseña" value="password"></ion-input>
+        <ion-input type="password" [(ngModel)]="password" placeholder="Contraseña" value="123456"></ion-input>
       </ion-item>
     </ion-list>
     <ion-label on-click="passForgot()">
@@ -30,5 +30,8 @@
     </button>
     <button id="inicioSesion-button3" ion-button clear color="positive" block href-inappbrowser="/signup" on-click="goToRegister()">
       O crear una cuenta
+    </button>
+    <button id="inicioSesion-button3" ion-button color="danger" block href-inappbrowser="/signup" on-click="goToMatrix()">
+      Boton a la Matrix
     </button>
 </ion-content>

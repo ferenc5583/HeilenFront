@@ -18,7 +18,7 @@ export class RestaurarContrasenaPage {
 
   forgotPass(){
       let url = `${this.url}/send`;
-      this.http.put(`${this.url}/user/${this.correo}`, {}).subscribe(res =>{        
+      this.http.put(`${this.url}/user/${this.correo}`, {}).subscribe((res: any) =>{        
       if(res.find == true){
       this.http.post(url, {to_address: this.correo, subject: "Restaurar Contraseña", body: "Su nueva contraseña es "+res.n_pass+", PROCURE CAMBIARLA UNA VEZ DENTRO DEL SISTEMA"}).subscribe(res => {
           this.correo = "";
