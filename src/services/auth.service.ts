@@ -7,7 +7,9 @@ import 'rxjs/add/operator/map';
 export class AuthService {
    userName: string;
    loggedIn: boolean;
-   url = 'http://localhost:8081';
+   url = 'http://192.168.0.106:8081';
+   //url para sever en lan: http://192.168.0.106:8081
+   //url para sever solo en equipo: http://localhost:8081
 
    constructor(private http: Http) {
       this.userName = '';

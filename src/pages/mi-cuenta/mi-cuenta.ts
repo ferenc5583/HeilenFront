@@ -22,8 +22,6 @@ export class MiCuentaPage {
 
   token = localStorage.getItem('token');
 
-  url = 'http://localhost:8081';
-
   constructor(
     public navCtrl: NavController,
     private auth: AuthService,
@@ -33,10 +31,11 @@ export class MiCuentaPage {
   logOut() {
     this.auth.logout();
     this.navCtrl.setRoot(InicioSesionPage);
+    this.http.put(`${this.auth.url}/user/isOnline/0` , {}, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } }).subscribe();
   }
 
   ngOnInit() {
-    let url = `${this.url}/user/`;
+    let url = `${this.auth.url}/user/`;
     this.http.get(url, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } })
       .subscribe((res: any) => {
         this.email = res.username;

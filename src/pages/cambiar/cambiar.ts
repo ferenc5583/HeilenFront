@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'page-cambiar',
@@ -14,9 +15,7 @@ export class CambiarPage {
 
   token = localStorage.getItem('token');
 
-  url = 'http://localhost:8081';
-
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: HttpClient) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: HttpClient, private auth: AuthService) {
   }
   
   abreModal(){
@@ -30,10 +29,10 @@ export class CambiarPage {
 
   //buscar por token el username en el back
   cambiarPass(){
-    this.http.get(`${this.url}/user/passFind/${this.currentPass}`, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } }).subscribe((res: any) => {
+    this.http.get(`${this.auth.url}/user/passFind/${this.currentPass}`, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } }).subscribe((res: any) => {
       if(res.find == true){
         if(this.newPass == this.repetePass){
-          this.http.put(`${this.url}/user/passEdit/${this.newPass}`, {}, { headers: { 'Authorization': 'bearer ' + this.token } }).subscribe((lares: any) => {
+          this.http.put(`${this.auth.url}/user/passEdit/${this.newPass}`, {}, { headers: { 'Authorization': 'bearer ' + this.token } }).subscribe((lares: any) => {
             alert(lares.message);
             this.currentPass = "";
             this.newPass = "";

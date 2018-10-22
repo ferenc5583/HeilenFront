@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
+import { RutaPage } from '../ruta/ruta';
 
 @Component({
   selector: 'page-home',
@@ -16,32 +18,37 @@ export class HomePage {
 
   token = localStorage.getItem('token');
 
-  url = 'http://localhost:8081';
-
   protected map: any;
 
-  constructor(public navCtrl: NavController, public geo: Geolocation, public http: HttpClient) {
+  id_user: any;
 
-    setInterval(()=> {
-      this.ngOnInit();
-    },5000); 
+  constructor(public navCtrl: NavController, public geo: Geolocation, public http: HttpClient, private auth: AuthService) {
 
   }
 
   ngOnInit(){
-    let url = `${this.url}/posicionProf/`;
-
     this.geo.getCurrentPosition().then(pos => {
       this.lat = pos.coords.latitude;
       this.lng = pos.coords.longitude;
-      this.http.put(`${this.url}/posicion/editUser/${pos.coords.latitude},${pos.coords.longitude}`, {}, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } })
-      .subscribe()
     }).catch(err => alert("No hemos podido encontrarte, Procura activar tu GPS"+err));
 
-    this.http.get(url)
-    .subscribe(r => {
-      this.locations = r;
-    })
+    this.http.put(`${this.auth.url}/user/isOnline/1` , {}, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } }).subscribe();
+
+    setInterval(()=> {
+      this.geo.getCurrentPosition().then(pos => {
+        this.lat = pos.coords.latitude;
+        this.lng = pos.coords.longitude;
+        this.http.put(`${this.auth.url}/posicion/editUser/${pos.coords.latitude},${pos.coords.longitude}`, {}, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } })
+        .subscribe()
+      }).catch(err => alert("No hemos podido encontrarte, Procura activar tu GPS"+err));
+  
+      let url = `${this.auth.url}/posicionProf/`;
+  
+      this.http.get(url)
+      .subscribe((r:any) => {
+        this.locations = r;
+      })
+    },5000);  
   }
 
   protected mapReady(map) {
@@ -51,6 +58,10 @@ export class HomePage {
   public myPosition = () => {
     if (this.map)
       this.map.panTo({ lat: this.lat, lng: this.lng });
+  }
+
+  goToMatrix(){
+    this.navCtrl.push(RutaPage,{id_user:this.id_user});
   }
 
 }

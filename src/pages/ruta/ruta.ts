@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 
 import { HttpClient } from '@angular/common/http';
@@ -19,8 +19,11 @@ export class RutaPage {
   distance: any;
   duration: any;
 
+  id_user: any;
 
-  constructor(public navCtrl: NavController, public geo: Geolocation, public http: HttpClient) {
+  constructor(public navCtrl: NavController, public geo: Geolocation, public http: HttpClient, public navParams: NavParams) {
+
+    this.id_user = navParams.get('id_user');
 
     setInterval(() => {
       this.ngOnInit();
@@ -41,11 +44,11 @@ export class RutaPage {
       let url = `http://router.project-osrm.org/route/v1/car/${pos.coords.longitude},${pos.coords.latitude};-71.831768,-36.629004`;
       this.http.get(url)
       .subscribe((r: any) => {
-        this.duration = (Math.round(r.routes[0].legs[0].duration)/60);
-        this.distance = (Math.round(r.routes[0].legs[0].distance)/1000);
+        this.duration = (Math.round(r.routes[0].legs[0].duration)/60).toFixed(1);
+        this.distance = (Math.round(r.routes[0].legs[0].distance)/1000).toFixed(1);
       })
     }).catch(err => alert("No hemos podido encontrarte, Procura activar tu GPS"));
-    console.log("ngOn");
+    console.log(this.id_user);
   }
 
   getDirection() {
@@ -54,7 +57,6 @@ export class RutaPage {
     }).catch(err => alert("No hemos podido encontrarte, Procura activar tu GPS"));
 
     this.destination = { lat: -36.629004, lng: -71.831768 }
-    console.log("getDir");
   }
 
 }

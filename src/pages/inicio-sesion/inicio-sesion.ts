@@ -19,8 +19,6 @@ export class InicioSesionPage {
   password: string;
   isLogged: boolean;
 
-  url = 'http://localhost:8081';
-
   constructor(
     public navCtrl: NavController,
     public http: HttpClient,
@@ -30,16 +28,16 @@ export class InicioSesionPage {
   Signup() {
     //login solo para pacientes, cambiar numero de rol para otros roles
     let f = { username: this.username, password: this.password };
-    this.http.get(`${this.url}/user/byRole/${this.username},1`).subscribe(res => {
+    this.http.get(`${this.auth.url}/user/byRole/${this.username},1`).subscribe(res => {
       this.auth.login(f)
         .subscribe(
           rs => this.isLogged = rs,
-          er => console.log(er),
+          er => alert("Credenciales incorrectas o inexistentes"),
           () => {
             if (this.isLogged == true) {
               this.navCtrl.setRoot(HomePage)
                 .then(data => console.log(data),
-                  error => console.log(error));
+                  error => alert(error));
             } else {
               console.log("Acceso Denegado");
             }
@@ -59,6 +57,9 @@ export class InicioSesionPage {
 
   ngOnInit() {
     this.subscribeCurrentPosition()
+    if(localStorage.getItem('token') != null && navigator.onLine == true){
+      this.navCtrl.setRoot(HomePage);
+    }
   }
 
   subscribeCurrentPosition() {
@@ -77,4 +78,6 @@ export class InicioSesionPage {
   goToMatrix(){
     this.navCtrl.push(RutaPage);
   }
+
+  
 }
