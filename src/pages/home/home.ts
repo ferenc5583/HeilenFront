@@ -63,5 +63,4 @@ export class HomePage {
   goToMatrix(){
     this.navCtrl.push(RutaPage,{id_user:this.id_user});
   }
-
 }
