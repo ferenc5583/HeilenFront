@@ -48,7 +48,7 @@ export class HomePage {
       .subscribe((r:any) => {
         this.locations = r;
       })
-    },5000);  
+    },10000);  
   }
 
   protected mapReady(map) {

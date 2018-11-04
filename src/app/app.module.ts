@@ -22,6 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { AuthService } from '../services/auth.service';
 
+import {DatePipe} from '@angular/common';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -62,6 +64,7 @@ import { AuthService } from '../services/auth.service';
     SplashScreen,
     Geolocation,
     AuthService,
+    DatePipe,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

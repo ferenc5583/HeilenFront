@@ -19,7 +19,7 @@ export class RestaurarContrasenaPage {
       let url = `${this.auth.url}/send`;
       this.http.put(`${this.auth.url}/user/${this.correo}`, {}).subscribe((res: any) =>{        
       if(res.find == true){
-      this.http.post(url, {to_address: this.correo, subject: "Restaurar Contraseña", body: "Su nueva contraseña es "+res.n_pass+", PROCURE CAMBIARLA UNA VEZ DENTRO DEL SISTEMA"}).subscribe(res => {
+      this.http.post(url, {to_address: this.correo, subject: "Solicitud de Restauración de Contraseña", body: "Hemos detectado una solicitud de restauración de Contraseña. Su nueva contraseña es "+res.n_pass+", PROCURE CAMBIARLA UNA VEZ DENTRO DEL SISTEMA."}).subscribe(res => {
           this.correo = "";
         });
       }else{

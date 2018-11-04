@@ -26,13 +26,10 @@
               <td>Email: {{location.id_usuario.username}}</td>
             </tr>
             <tr>
-              <td>Latitud: {{location.lat}}</td>
+              <td>Calificacion: {{location.id_usuario.id_calificacion.pun_final.toFixed(2)}}/5</td>
             </tr>
             <tr>
-              <td>Longitud: {{location.lng}}</td>
-            </tr>
-            <tr>
-              <td>id user: {{location.id_usuario.id}}</td>
+              <td>Especialidad: {{location.id_usuario.id_especialidad.nombre}}</td>
             </tr>
           </table>
           <button ion-button round color="secondary" block on-click="goToMatrix()">
