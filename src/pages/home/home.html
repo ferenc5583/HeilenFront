@@ -32,7 +32,7 @@
               <td>Especialidad: {{location.id_usuario.id_especialidad.nombre}}</td>
             </tr>
           </table>
-          <button ion-button round color="secondary" block on-click="goToMatrix()">
+          <button ion-button round color="secondary" block (click)="goToResumen(location)">
               Solicitar
           </button>
         </div>

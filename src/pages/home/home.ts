@@ -4,14 +4,14 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
-import { RutaPage } from '../ruta/ruta';
+import { PrecontratoPage } from '../precontrato/precontrato';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  
+
   lat: any;
   lng: any;
   locations: any;
@@ -26,29 +26,29 @@ export class HomePage {
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.geo.getCurrentPosition().then(pos => {
       this.lat = pos.coords.latitude;
       this.lng = pos.coords.longitude;
-    }).catch(err => alert("No hemos podido encontrarte, Procura activar tu GPS"+err));
+    }).catch(err => alert("No hemos podido encontrarte, Procura activar tu GPS" + err));
 
-    this.http.put(`${this.auth.url}/user/isOnline/1` , {}, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } }).subscribe();
+    this.http.put(`${this.auth.url}/user/isOnline/1`, {}, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } }).subscribe();
 
-    setInterval(()=> {
+    setInterval(() => {
       this.geo.getCurrentPosition().then(pos => {
         this.lat = pos.coords.latitude;
         this.lng = pos.coords.longitude;
         this.http.put(`${this.auth.url}/posicion/editUser/${pos.coords.latitude},${pos.coords.longitude}`, {}, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } })
-        .subscribe()
-      }).catch(err => alert("No hemos podido encontrarte, Procura activar tu GPS"+err));
-  
+          .subscribe()
+      }).catch(err => alert("No hemos podido encontrarte, Procura activar tu GPS" + err));
+
       let url = `${this.auth.url}/posicionProf/`;
-  
-      this.http.get(url)
-      .subscribe((r:any) => {
-        this.locations = r;
-      })
-    },10000);  
+
+      this.http.get(url, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } })
+        .subscribe((r: any) => {
+          this.locations = r;
+        })
+    }, 10000);
   }
 
   protected mapReady(map) {
@@ -60,7 +60,10 @@ export class HomePage {
       this.map.panTo({ lat: this.lat, lng: this.lng });
   }
 
-  goToMatrix(){
-    this.navCtrl.push(RutaPage,{id_user:this.id_user});
+  goToResumen(location) {
+    this.navCtrl.push(PrecontratoPage,
+      {
+        id: location.id_usuario.id
+      });
   }
 }

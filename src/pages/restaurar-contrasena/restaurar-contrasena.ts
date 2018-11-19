@@ -12,21 +12,21 @@ export class RestaurarContrasenaPage {
   correo: string = "";
 
   constructor(public navCtrl: NavController, public http: HttpClient, private auth: AuthService) {
-    
+
   }
 
-  forgotPass(){
-      let url = `${this.auth.url}/send`;
-      this.http.put(`${this.auth.url}/user/${this.correo}`, {}).subscribe((res: any) =>{        
-      if(res.find == true){
-      this.http.post(url, {to_address: this.correo, subject: "Solicitud de Restauración de Contraseña", body: "Hemos detectado una solicitud de restauración de Contraseña. Su nueva contraseña es "+res.n_pass+", PROCURE CAMBIARLA UNA VEZ DENTRO DEL SISTEMA."}).subscribe(res => {
+  forgotPass() {
+    this.http.put(`${this.auth.url}/user/${this.correo}`, {}).subscribe((res: any) => {
+      if (res.find == true) {
+        this.http.post(`${this.auth.url}/send`, { to_address: this.correo, subject: "Solicitud de Restauración de Contraseña", body: "Hemos detectado una solicitud de restauración de Contraseña. Su nueva contraseña es " + res.n_pass + ", PROCURE CAMBIARLA UNA VEZ DENTRO DEL SISTEMA." }).subscribe((res: any) => {
+          alert(res.message);
           this.correo = "";
         });
-      }else{
+      } else {
         alert("Usuario no Encontrado");
       }
-      });     
-       
+    });
+
   }
-  
+
 }
