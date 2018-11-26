@@ -22,7 +22,8 @@ export class InicioSesionPage {
   constructor(
     public navCtrl: NavController,
     public http: HttpClient,
-    private auth: AuthService) {
+    private auth: AuthService,
+    ) {
   }
 
   Signup() {
@@ -32,7 +33,7 @@ export class InicioSesionPage {
       this.auth.login(f)
         .subscribe(
           rs => this.isLogged = rs,
-          er => alert("Credenciales incorrectas o inexistentes"),
+          er => this.auth.showAlert("Credenciales incorrectas o inexistentes"),
           () => {
             if (this.isLogged == true) {
               this.navCtrl.setRoot(HomePage)
@@ -43,7 +44,7 @@ export class InicioSesionPage {
             }
           }
         )
-    }, error => alert("Credenciales incorrectas o inexistentes"))
+    }, error => this.auth.showAlert("Credenciales incorrectas o inexistentes"))
   }
 
   goToRegister(params) {
@@ -69,7 +70,7 @@ export class InicioSesionPage {
       },
       (error) => {
         console.log(error)
-        alert("GPS desactivado, Activelo");
+        this.auth.showAlert("GPS desactivado, Activelo")
       },
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 10000 }
     );
@@ -78,6 +79,5 @@ export class InicioSesionPage {
   goToMatrix(){
     this.navCtrl.push(RutaPage);
   }
-
-  
+ 
 }

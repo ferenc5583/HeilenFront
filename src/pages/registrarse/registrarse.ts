@@ -33,7 +33,7 @@ export class RegistrarsePage{
       arregloDeSubCadenas = cadena.split(separador);
       if(this.firstname.toLocaleLowerCase() == arregloDeSubCadenas[2] && this.lastname.toLocaleLowerCase() == arregloDeSubCadenas[0]){
         if(this.password != this.passRepete){
-          alert("La contraseñas no coinciden");
+          this.auth.showAlert("Las contraseñas no Coinciden");
         }else{
           let url = `${this.auth.url}/user/nuevoPaciente/`;
           //cambiar fecha x fecha actual del sistema
@@ -42,15 +42,15 @@ export class RegistrarsePage{
               this.http.post(`${this.auth.url}/send`, {to_address: this.username, subject: `Bienvenido(a) a Heilen ${this.firstname.toLocaleUpperCase()}`, body: "Hola! Te damos la mas corial bienvenida a Heilen. Queremos aprovechar esta oportunidad para decirle que estamos contentos de que haya escogido nuestros servicios. Es nuestro privilegio servirle y ofrecerle nuestra mejor atención posible."}).subscribe(res => {});
               this.navCtrl.setRoot(InicioSesionPage);
             }else{
-              alert("Este usuario ya esta Registrado");
+              this.auth.showAlert("Este usuario ya esta Registrado");
             }           
           });
         }
       }else{
-        alert("tus credenciales no coinciden");
+        this.auth.showAlert("Tus credenciales no coinciden");
       }
     }, error => {
-      alert("rut invalido");
+      this.auth.showAlert("Rut Inválido");
     })
   }
 

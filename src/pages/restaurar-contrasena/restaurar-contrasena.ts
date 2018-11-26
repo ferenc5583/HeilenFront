@@ -23,7 +23,7 @@ export class RestaurarContrasenaPage {
           this.correo = "";
         });
       } else {
-        alert("Usuario no Encontrado");
+        this.auth.showAlert("Usuario no Encontrado");
       }
     });
 

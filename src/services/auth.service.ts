@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
+import { ToastController } from 'ionic-angular';
 
 import 'rxjs/add/operator/map';
 
@@ -10,9 +11,9 @@ export class AuthService {
    url = 'http://192.168.0.106:8081';
    //url para sever en lan: http://192.168.0.106:8081
    //url para sever solo en equipo: http://localhost:8081
-   //url dominio de amazon: http://heilenback.sa-east-1.elasticbeanstalk.com
+   //url dominio de amazon: http://heilenback-env-1.ai3uyfsp23.sa-east-1.elasticbeanstalk.com
 
-   constructor(private http: Http) {
+   constructor(private http: Http, public toastCtrl: ToastController) {
       this.userName = '';
       this.loggedIn = false;
    }
@@ -48,4 +49,12 @@ export class AuthService {
    isLoggedIn() {
       return this.loggedIn;
    }
+
+   showAlert(message: string) {
+      const toast = this.toastCtrl.create({
+        message: message,
+        duration: 3000
+      });
+      toast.present();
+    }
 }

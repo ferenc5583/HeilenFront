@@ -6,7 +6,7 @@
 
 <ion-content class="grid-basic-page">
 
-  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15" [streetViewControl]="false">
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15" [streetViewControl]="false" [zoomControl]="false" [disableDefaultUI]="true" [disableDoubleClickZoom]="true" gestureHandling="none">
     <agm-direction [origin]="origin" [destination]="destination" travelMode="DRIVING">
     </agm-direction>
   </agm-map>

@@ -1,23 +1,28 @@
 <ion-header>
-  <ion-navbar color="primary">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Mis Solucitudes</ion-title>
-  </ion-navbar>
+    <ion-navbar color="primary">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            Mis Solicitudes
+        </ion-title>
+    </ion-navbar>
 </ion-header>
+<ion-content padding>
+    Historial de Solicitudes
+    <ion-list>
+        <ion-item *ngFor="let item of contratos">
+            <h2>id: {{ item.id }}</h2>
+            <p>id_paciente: {{ item.id_paciente }}</p>
+            <p>id_profesional: {{ item.id_profesional }}</p>
+            <p>detalle: {{ item.detalle }}</p>
+            <p>monto: {{ item.monto }}</p>
+            <p>acetada: {{ item.aceptada }}</p>
+            <p>terminada: {{ item.terminada }}</p>
+            <p>calificada: {{ item.calificada }}</p>
+            <p>fecha: {{ item.fecha | date:"dd/MM/yyyy" }}</p>
+            <button ion-button clear item-right>Más...</button>
+        </ion-item>
+    </ion-list>
 
-<ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
 </ion-content>

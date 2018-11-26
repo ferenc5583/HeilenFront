@@ -16,6 +16,10 @@ export class HomePage {
   lng: any;
   locations: any;
 
+  public blue: boolean = true;
+  public orange: boolean = true;
+  public green: boolean = true;
+  
   token = localStorage.getItem('token');
 
   protected map: any;
@@ -23,7 +27,7 @@ export class HomePage {
   id_user: any;
 
   constructor(public navCtrl: NavController, public geo: Geolocation, public http: HttpClient, private auth: AuthService) {
-
+    
   }
 
   ngOnInit() {
@@ -48,7 +52,7 @@ export class HomePage {
         .subscribe((r: any) => {
           this.locations = r;
         })
-    }, 10000);
+    }, 7000);
   }
 
   protected mapReady(map) {
@@ -66,4 +70,5 @@ export class HomePage {
         id: location.id_usuario.id
       });
   }
+
 }
