@@ -27,33 +27,33 @@ export class RutaPage {
 
     this.idPro = navParams.get('id');
 
-    setInterval(() => {
-      this.ngOnInit();
-    }, 2000);
 
   }
 
-  ionViewDidLoad() {
+  /* ionViewDidLoad() {
     this.geo.getCurrentPosition().then(pos => {
       this.lat = pos.coords.latitude;
       this.lng = pos.coords.longitude;
-    }).catch(err => alert("No hemos podido encontrarte, Procura activar tu GPS"));
-  }
+    }).catch(err => this.auth.showAlert("No podemos Encontrarte"));
+  } */
 
   ngOnInit() {
-    this.geo.getCurrentPosition().then(pos => {
-      this.http.get(`${this.auth.url}/posicionUserId/${this.idPro}`).subscribe((res: any) => {
-        let url = `http://router.project-osrm.org/route/v1/car/${pos.coords.longitude},${pos.coords.latitude};${res.lng},${res.lat}`;
-        this.origin = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-        this.destination = { lat: res.lat, lng: res.lng };
-        this.http.get(url)
-          .subscribe((r: any) => {
-            this.duration = (Math.round(r.routes[0].legs[0].duration) / 60).toFixed(1);
-            this.distance = (Math.round(r.routes[0].legs[0].distance) / 1000).toFixed(1);
-          })
-      })
-    }).catch(err => alert("No hemos podido encontrarte, Procura activar tu GPS"));
-    console.log(this.idPro);
+    setInterval(()=> {
+
+      this.geo.getCurrentPosition().then(pos => {
+        this.http.get(`${this.auth.url}/posicionUserId/${this.idPro}`).subscribe((res: any) => {
+          let url = `http://router.project-osrm.org/route/v1/car/${pos.coords.longitude},${pos.coords.latitude};${res.lng},${res.lat}`;
+          this.origin = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+          this.destination = { lat: res.lat, lng: res.lng };
+          this.http.get(url)
+            .subscribe((r: any) => {
+              this.duration = (Math.round(r.routes[0].legs[0].duration) / 60).toFixed(1);
+              this.distance = (Math.round(r.routes[0].legs[0].distance) / 1000).toFixed(1);
+            })
+        })
+      }).catch(err => this.auth.showAlert("No podemos Encontrarte"));
+
+    }, 2000)
   }
 
   goToMap() {

@@ -70,7 +70,7 @@ export class InicioSesionPage {
       },
       (error) => {
         console.log(error)
-        this.auth.showAlert("GPS desactivado, Activelo")
+        this.auth.showAlert("GPS desactivado, Activelo");
       },
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 10000 }
     );

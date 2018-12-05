@@ -21,7 +21,7 @@ export class CambiarPage {
   abreModal(){
     const alert = this.alertCtrl.create({
       title: 'Ayuda',
-      subTitle: 'Si estas restaurando tu contraseña, ingresa en el primer campo la contraseña actual que se te ha enviado a tu Correo',
+      subTitle: 'Si estás restaurando tu contraseña, ingresa en el primer campo la contraseña actual que se te ha enviado a tu Correo',
       buttons: ['Cerrar']
     });
     alert.present();
@@ -33,16 +33,16 @@ export class CambiarPage {
       if(res.find == true){
         if(this.newPass == this.repetePass){
           this.http.put(`${this.auth.url}/user/passEdit/${this.newPass}`, {}, { headers: { 'Authorization': 'bearer ' + this.token } }).subscribe((lares: any) => {
-            alert(lares.message);
+            this.auth.showAlert(lares.message)
             this.currentPass = "";
             this.newPass = "";
             this.repetePass = "";
           });
         }else{
-          alert("Las contraseñas no coinciden");
+          this.auth.showAlert("Las contraseñas no coinciden");
         }
       }
-    }, error => alert("Contraseña actual incorrecta"))
+    }, error => this.auth.showAlert("Contraseña actual Incorrecta"))
     
   }
   

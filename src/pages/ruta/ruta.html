@@ -6,7 +6,7 @@
 
 <ion-content class="grid-basic-page">
 
-  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15" [streetViewControl]="false" [zoomControl]="false" [disableDefaultUI]="true" [disableDoubleClickZoom]="true" gestureHandling="none">
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15" [streetViewControl]="false">
     <agm-direction [origin]="origin" [destination]="destination" travelMode="DRIVING">
     </agm-direction>
   </agm-map>
@@ -30,8 +30,8 @@
     </ion-row>
   </ion-grid>
 
-  <button ion-button color="danger" block (click)="goToMap()">
+  <!-- <button ion-button color="danger" block (click)="goToMap()">
     Cancelar Servicio
-  </button>
+  </button> -->
 
 </ion-content>

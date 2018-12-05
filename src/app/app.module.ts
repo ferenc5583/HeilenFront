@@ -12,6 +12,8 @@ import { MiCuentaPage } from '../pages/mi-cuenta/mi-cuenta';
 import { RestaurarContrasenaPage } from '../pages/restaurar-contrasena/restaurar-contrasena';
 import { CambiarPage } from '../pages/cambiar/cambiar';
 import { PrecontratoPage } from '../pages/precontrato/precontrato';
+import { TerminosPage } from '../pages/terminos/terminos';
+import { DetallePage } from '../pages/detalle/detalle';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -36,7 +38,9 @@ import {DatePipe} from '@angular/common';
     MiCuentaPage,
     RestaurarContrasenaPage,
     CambiarPage,
-    PrecontratoPage
+    PrecontratoPage,
+    TerminosPage,
+    DetallePage
   ],
   imports: [
     BrowserModule,
@@ -60,7 +64,9 @@ import {DatePipe} from '@angular/common';
     MiCuentaPage,
     RestaurarContrasenaPage,
     CambiarPage,
-    PrecontratoPage
+    PrecontratoPage,
+    TerminosPage,
+    DetallePage
   ],
   providers: [
     StatusBar,

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
+import { DetallePage } from '../detalle/detalle';
 
 @Component({
     selector: 'page-list',
@@ -22,5 +23,11 @@ export class ListPage {
         .subscribe((res: any) => {
             this.contratos = res;
         })
+    }
+
+    goToDetalle(item){
+        this.navCtrl.push(DetallePage,{
+            id_cont: item.id
+        });
     }
 }

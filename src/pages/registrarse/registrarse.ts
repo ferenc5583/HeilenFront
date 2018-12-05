@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { InicioSesionPage } from '../inicio-sesion/inicio-sesion';
 import { AuthService } from '../../services/auth.service';
 import { DatePipe } from '@angular/common';
+import { TerminosPage } from '../terminos/terminos';
 
 @Component({
   selector: 'page-registrarse',
@@ -18,6 +19,7 @@ export class RegistrarsePage{
   lastname: string = "";
   passRepete: string = "";
   currentDate: string = "";
+  public acept: boolean = true;
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: HttpClient, private auth: AuthService, private datePipe: DatePipe) {
   }
@@ -35,16 +37,20 @@ export class RegistrarsePage{
         if(this.password != this.passRepete){
           this.auth.showAlert("Las contraseñas no Coinciden");
         }else{
+          if(this.acept == true){
           let url = `${this.auth.url}/user/nuevoPaciente/`;
-          //cambiar fecha x fecha actual del sistema
           this.http.post(url, {username: this.username ,password: this.password, rut: this.rut ,firstname: this.firstname, lastname: this.lastname , enabled: true, online: false, lastPasswordResetDate: this.currentDate}).subscribe((res: any) => {
             if(res.exist != true){
               this.http.post(`${this.auth.url}/send`, {to_address: this.username, subject: `Bienvenido(a) a Heilen ${this.firstname.toLocaleUpperCase()}`, body: "Hola! Te damos la mas corial bienvenida a Heilen. Queremos aprovechar esta oportunidad para decirle que estamos contentos de que haya escogido nuestros servicios. Es nuestro privilegio servirle y ofrecerle nuestra mejor atención posible."}).subscribe(res => {});
+              this.auth.showAlert("Usuario guardado exitosamente");
               this.navCtrl.setRoot(InicioSesionPage);
             }else{
-              this.auth.showAlert("Este usuario ya esta Registrado");
+              this.auth.showAlert("Este usuario ya está Registrado");
             }           
           });
+        }else{
+          this.auth.showAlert("Deve aceptar Términos y Condiciones");
+        }
         }
       }else{
         this.auth.showAlert("Tus credenciales no coinciden");
@@ -54,15 +60,14 @@ export class RegistrarsePage{
     })
   }
 
-  //hacer planilla de terminos y condiciones funcional
   goToTerminos(){
-    alert("te vamoa a kagar");
+    this.navCtrl.push(TerminosPage);
   }
 
   abreModal(){
     const alert = this.alertCtrl.create({
       title: 'Ayuda',
-      subTitle: 'Procura ingresar tus datos veridicos tanto rut, nombre, apellido y tu correo, estos datos son importantes si deseas restaurar tu contraseña',
+      subTitle: 'Procura ingresar tus datos verídicos tanto rut, nombre, apellido y tu correo, estos datos son importantes si deseas restaurar tu contraseña',
       buttons: ['Cerrar']
     });
     alert.present();

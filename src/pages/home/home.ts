@@ -34,7 +34,7 @@ export class HomePage {
     this.geo.getCurrentPosition().then(pos => {
       this.lat = pos.coords.latitude;
       this.lng = pos.coords.longitude;
-    }).catch(err => alert("No hemos podido encontrarte, Procura activar tu GPS" + err));
+    }).catch(err => this.auth.showAlert("No podemos Encontrarte"));
 
     this.http.put(`${this.auth.url}/user/isOnline/1`, {}, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } }).subscribe();
 
@@ -44,7 +44,7 @@ export class HomePage {
         this.lng = pos.coords.longitude;
         this.http.put(`${this.auth.url}/posicion/editUser/${pos.coords.latitude},${pos.coords.longitude}`, {}, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } })
           .subscribe()
-      }).catch(err => alert("No hemos podido encontrarte, Procura activar tu GPS" + err));
+      }).catch(err => this.auth.showAlert("No podemos Encontrarte"));
 
       let url = `${this.auth.url}/posicionProf/`;
 
