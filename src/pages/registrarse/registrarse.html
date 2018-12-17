@@ -31,29 +31,27 @@
       </ion-label>
       <ion-input type="email" [(ngModel)]="username" placeholder=""></ion-input>
     </ion-item>
-    <!-- <ion-item id="registrarse-input7">
-        <ion-label>
-          Nacimiento
-        </ion-label>
-        <ion-input type="date" placeholder=""></ion-input>
-      </ion-item> -->
+    <ion-item>
+      <ion-label>Fecha Nacimiento</ion-label>
+      <ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="nacimiento"></ion-datetime>
+    </ion-item>
   </ion-list>
   <div class="spacer" style="width:300px;height:26px;" id="registrarse-spacer2"></div>
   <ion-item id="registrarse-input7">
-    <ion-label stacked>
+    <ion-label stacked >
       Contraseña
     </ion-label>
-    <ion-input type="password" [(ngModel)]="password" placeholder=""></ion-input>
+    <ion-input type="password" [(ngModel)]="password" placeholder="" minlength="5"></ion-input>
   </ion-item>
   <ion-item id="registrarse-input8">
     <ion-label stacked>
       Repetir Contraseña
     </ion-label>
-    <ion-input type="password" [(ngModel)]="passRepete" placeholder=""></ion-input>
+    <ion-input type="password" [(ngModel)]="passRepete" placeholder="" minlength="5"></ion-input>
   </ion-item>
   <br>
   <ion-label stacked on-click="goToTerminos()" id="terminos">Acepta los Términos y Condiciones del Servicio</ion-label>
-  <ion-checkbox checked="true" checked="true" [(ngModel)]="acept"></ion-checkbox>
+  <ion-checkbox checked="true" [(ngModel)]="acept"></ion-checkbox>
 
   <button id="registrarse-button4" ion-button color="stable" block on-click="goToRegister()">
     Registrarse

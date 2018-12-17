@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { TerminosPage } from '../terminos/terminos';
 import { DatePipe } from '@angular/common';
 import { RutaPage } from '../ruta/ruta';
+import { HomePage } from '../home/home';
 
 @Component({
     selector: 'page-precontrato',
@@ -49,10 +50,10 @@ export class PrecontratoPage {
                     this.monto = 15000;
                 }
                 if (res.id_especialidad.nombre == "Nutricionista") {
-                    this.monto = 16000;
+                    this.monto = 18000;
                 }
                 if (res.id_especialidad.nombre == "Enfermero") {
-                    this.monto = 17000;
+                    this.monto = 18000;
                 }
             });
     }
@@ -79,8 +80,17 @@ export class PrecontratoPage {
                         this.before = false;
                         this.navCtrl.setRoot(RutaPage,
                             {
-                                id: this.idPro
+                                id: this.idPro,
+                                id_cont: this.idCont
                             });
+                    }
+                    if(res.cancelada == true && this.before == true){
+                        this.before = false;
+                        this.navCtrl.setRoot(HomePage);
+                        this.auth.showAlert("El profesional ha rechazado la Petición");
+                        this.http.delete(`${this.auth.url}`+'/contrato/'+ this.idCont).subscribe((res: any)=>{
+                            console.log(res);
+                        })
                     }
                 })
             }

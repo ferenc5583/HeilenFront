@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            Término del Servicio
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <h5 text-center>El Profesional ha Arribado a tu Pocisión</h5>
+    <p text-center>Recuerda pagar al profesional por su atención y calificarla posteriormente, éste último punto es
+        opcional, bien lo puedes hacer después en el apartado de "Mis Solicitudes".</p>
+    <h6 text-center>Monto a Pagar</h6>
+    <h4 text-center style="color: #f53d3d">${{ monto }}</h4>
+    <button ion-button block (click)="pay()">Terminar la Atención</button>
+    <button ion-button block on-click="calificate()" [hidden]="before">Calificar y Terminar la Atención</button>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <p text-center>Ud se ha comprometido a aceptár todos
+            los <u on-click="goToTerminos()">Términos y condiciones</u> expuestos del servicio y hacerse
+            responsable de
+            este contrato.</p>
+    </ion-toolbar>
+</ion-footer>

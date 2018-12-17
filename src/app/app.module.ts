@@ -14,6 +14,8 @@ import { CambiarPage } from '../pages/cambiar/cambiar';
 import { PrecontratoPage } from '../pages/precontrato/precontrato';
 import { TerminosPage } from '../pages/terminos/terminos';
 import { DetallePage } from '../pages/detalle/detalle';
+import { CierrePage } from '../pages/cierre/cierre';
+import { SobrePage } from '../pages/sobre/sobre';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -40,7 +42,9 @@ import {DatePipe} from '@angular/common';
     CambiarPage,
     PrecontratoPage,
     TerminosPage,
-    DetallePage
+    DetallePage,
+    CierrePage,
+    SobrePage
   ],
   imports: [
     BrowserModule,
@@ -66,7 +70,9 @@ import {DatePipe} from '@angular/common';
     CambiarPage,
     PrecontratoPage,
     TerminosPage,
-    DetallePage
+    DetallePage,
+    CierrePage,
+    SobrePage
   ],
   providers: [
     StatusBar,

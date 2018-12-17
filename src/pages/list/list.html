@@ -9,15 +9,33 @@
     </ion-navbar>
 </ion-header>
 <ion-content padding>
-    Historial de Solicitudes
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingText="Suelta para Actualizar">
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <ion-searchbar (ionInput)="getItems($event)" placeholder="Buscador"></ion-searchbar>
+
+    <p *ngIf="contratos == 0" text-center>No hay Servicios.</p>
+
     <ion-list>
         <ion-item *ngFor="let item of contratos">
             <p>Fecha: {{ item.fecha }}</p>
             <p>Hora: {{ item.hora }}</p>
             <p>Monto: ${{ item.monto }}</p>
-            <p>Calificada: {{ item.calificada }}</p>
-            <button ion-button clear item-right (click)="goToDetalle(item)">Más...</button>
+            <button ion-button clear item-right small (click)="goToDetalle(item)">
+                Más Detalles &nbsp;<ion-icon name="arrow-forward"></ion-icon>
+            </button>
+            <p *ngIf="item.terminada == false && item.calificada == false && item.cancelada == true" style="color: #f53d3d">
+                <ion-icon name="alert"></ion-icon> Cancelada!!
+              </p>
+            <p *ngIf="item.terminada == false && item.calificada == false && item.cancelada == false" style="color: #f7c70c">
+                <ion-icon name="alert"></ion-icon> No Terminada!!
+            </p>
+            <p *ngIf="item.calificada == false && item.terminada == true && item.cancelada == false" style="color: #32db64">
+                <ion-icon name="alert"></ion-icon> No Calificada!!
+            </p>
         </ion-item>
     </ion-list>
-
 </ion-content>

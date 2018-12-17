@@ -36,14 +36,22 @@
             Profesión del Servicio
             <ion-note item-right>{{ especialidad }}</ion-note>
         </ion-item>
-        <ion-item color="none">
+        <ion-item color="none" *ngIf="terminada == true">
             Monto Pagado
             <ion-note item-right>${{ monto }}</ion-note>
         </ion-item>
     </ion-list>
 
-    <button ion-button color="secondary" block *ngIf="calificada == false" (click)="calificate()" [hidden]="before"> 
+    <p *ngIf="terminada == false && calificada == false && cancelada == true" style="color: #f53d3d" text-center>
+        <ion-icon name="alert"></ion-icon> Esta Solicitud la Canceló el profesional!!
+    </p>
+
+    <p *ngIf="terminada == false && calificada == false && cancelada == false" style="color: #f7c70c" text-center>
+        <ion-icon name="alert"></ion-icon> Esta Solicitud no ha sido Terminada. Contacta con el equipo de Heilen para resolver el estado!!
+    </p>
+
+    <button ion-button color="secondary" block *ngIf="calificada == false && terminada == true && cancelada == false" (click)="calificate()" [hidden]="before"> 
             Calificar Profesional
     </button>
-
+    <!-- controlar esatdo de el contrato -->
 </ion-content>

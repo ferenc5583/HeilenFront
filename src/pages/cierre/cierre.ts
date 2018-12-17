@@ -1,61 +1,48 @@
 import { Component } from '@angular/core';
-import { NavParams, AlertController } from 'ionic-angular';
+import { NavParams, AlertController, NavController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
+import { HomePage } from '../home/home';
 import { AuthService } from '../../services/auth.service';
+import { TerminosPage } from '../terminos/terminos';
 
 @Component({
-    selector: 'page-detalle',
-    templateUrl: 'detalle.html'
+    selector: 'page-cierre',
+    templateUrl: 'cierre.html'
 })
 
-export class DetallePage {
+export class CierrePage {
+
+    id_cont: any;
+
+    id_cali: any;
+
+    monto: any;
 
     before: boolean = false;
 
-    public id_cont: any;
-
-    fecha: any;
-    hora: any;
-    monto: any;
-    calificada: boolean;
-    terminada: boolean;
-    cancelada: boolean;
-
-    nombre_pro: any;
-    apellido_pro: any;
-    rut_pro: any;
-    especialidad: any;
-
-    testRadioOpen = false;
-    testRadioResult: any;
-
-    public id_cali: any;
-
-
-    constructor(public navParams: NavParams, public http: HttpClient, private auth: AuthService, public alertCtrl: AlertController) {
+    constructor(public navParams: NavParams, public http: HttpClient, public alertCtrl: AlertController, public navCtrl: NavController, public auth: AuthService) {
 
         this.id_cont = navParams.get('id_cont');
 
     }
 
-    ngOnInit() {
+    ngOnInit(){
         this.http.get(`${this.auth.url}/contrato/${this.id_cont}`).subscribe((res: any) => {
-            this.fecha = res.fecha;
-            this.hora = res.hora;
             this.monto = res.monto;
-            this.calificada = res.calificada;
-            this.terminada = res.terminada;
-            this.cancelada = res.cancelada;
-
             this.http.get(`${this.auth.url}/user/${res.id_profesional}`).subscribe((res: any) => {
-                this.nombre_pro = res.firstname.toUpperCase();
-                this.apellido_pro = res.lastname.toUpperCase();
-                this.rut_pro = res.rut.toUpperCase();
-                this.especialidad = res.id_especialidad.nombre.toUpperCase();
                 this.id_cali = res.id_calificacion.id;
             })
         })
     }
+
+    pay() {
+        this.http.put(`${this.auth.url}/contrato/estados/1,1,0,0,${this.id_cont}`, {}).subscribe((r: any) => {
+            this.navCtrl.setRoot(HomePage);
+        })
+    }
+
+    testRadioOpen = false;
+    testRadioResult: any;
 
     calificate() {
         let alert = this.alertCtrl.create();
@@ -96,18 +83,23 @@ export class DetallePage {
         alert.addButton({
             text: 'Calificar',
             handler: (data: any) => {
-                //console.log('Ud Calificó con:', data, "al id:", this.id_cali);
+                //console.log('Ud Calificó con:', data);
                 this.testRadioOpen = false;
                 this.testRadioResult = data;
                 this.http.put(`${this.auth.url}/calificacion/user/${this.id_cali},${data}`, {}).subscribe((res: any) =>{
                     this.before = true;
                 })
                 this.http.put(`${this.auth.url}/contrato/estados/1,1,1,0,${this.id_cont}`, {}).subscribe((r: any) =>{
+                    this.navCtrl.setRoot(HomePage);
                     this.auth.showAlert("Gracias por Calificar");
                 })
             }
         });
 
         alert.present();
+    }
+
+    goToTerminos(){
+        this.navCtrl.push(TerminosPage);
     }
 }

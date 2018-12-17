@@ -14,7 +14,7 @@ import { CambiarPage } from '../cambiar/cambiar';
   templateUrl: 'mi-cuenta.html'
 })
 export class MiCuentaPage {
-  
+
   nombre: string;
   apellido: string;
   email: string;
@@ -31,7 +31,7 @@ export class MiCuentaPage {
   logOut() {
     this.auth.logout();
     this.navCtrl.setRoot(InicioSesionPage);
-    this.http.put(`${this.auth.url}/user/isOnline/0` , {}, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } }).subscribe();
+    this.http.put(`${this.auth.url}/user/isOnline/0`, {}, { headers: { 'Content-Type': 'application/json', 'Authorization': 'bearer ' + this.token } }).subscribe();
   }
 
   ngOnInit() {
@@ -47,6 +47,16 @@ export class MiCuentaPage {
 
   passChange() {
     this.navCtrl.push(CambiarPage);
+  }
+
+  doRefresh(refresher) {
+    //durante la carga
+    this.ngOnInit();
+
+    setTimeout(() => {
+      //despues de cargar
+      refresher.complete();
+    }, 500);
   }
 
 }
